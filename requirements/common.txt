@@ -1,0 +1,5 @@
+# Common dependencies.
+
+django==1.8.4
+djangorestframework==3.2.3
+djangorestframework-jwt==1.7.2

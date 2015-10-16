@@ -1,0 +1,7 @@
+syntax:glob
+
+*.pyc
+*.sqlite3
+
+# SECURITY WARNING: Keep this file out of the repository.
+config/settings/live.py

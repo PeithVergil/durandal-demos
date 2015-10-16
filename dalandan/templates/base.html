@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="">
+
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>Dalandan: A Sample Web Application based on DurandalJS</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'styles/lib/bootstrap.css' %}" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{% static 'styles/style.css' %}" rel="stylesheet">
+
+        <script>
+            // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
+            var timeStamp = 't=' + (new Date()).getTime();
+            // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
+
+            var require = {
+                // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
+                urlArgs: timeStamp,
+                // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
+
+                paths: {
+                    'text'       : "{% static 'scripts/lib/text' %}",
+                    'jquery'     : "{% static 'scripts/lib/jquery' %}",
+                    'knockout'   : "{% static 'scripts/lib/knockout' %}",
+
+                    // Durandal Core
+                    'durandal'   : "{% static 'scripts/lib/durandal' %}",
+                    // Durandal Plugins
+                    'plugins'    : "{% static 'scripts/lib/durandal/plugins' %}",
+                    // Durandal Transitions
+                    'transitions': "{% static 'scripts/lib/durandal/transitions' %}",
+                },
+            };
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <a class="navbar-brand" href="#">Dalandan</a>
+
+            <ul class="nav nav-pills">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+
+          <div class="starter-template">
+            <h1>Bootstrap starter template</h1>
+            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+          </div>
+
+        </div><!-- /.container -->
+
+
+        <!-- JavaScript
+        ================================================== -->
+        <script src="{% static 'scripts/lib/require.js' %}" data-main="{% static 'scripts/home/main' %}"></script>
+    </body>
+</html>
