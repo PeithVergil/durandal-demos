@@ -6,3 +6,43 @@ body {
     padding: 3rem 1.5rem;
     text-align: center;
 }
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list .todo-item {
+    border-bottom: 1px solid #cdcdcd;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.todo-list .todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-list .title.done {
+    text-decoration: line-through;
+}
+
+.todo-list .checkbox {
+    margin-bottom: 0;
+}
+
+.todo-list .controls {
+    padding-left: 1.25rem;
+    list-style: none;
+    margin: 0;
+}
+
+.todo-list .controls:after,
+.todo-list .controls:before {
+    display: table;
+    content: " ";
+}
+
+.todo-list .controls:after {
+    clear: both;
+}

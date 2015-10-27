@@ -1,0 +1,27 @@
+<div>
+    <ul class="todo-list" data-bind="foreach: todos">
+        <li class="todo-item">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" data-bind="value: id, checked: done " /> <span class="title" data-bind="html: title, css: { 'done': done }"></span>
+                </label>
+            </div>
+            
+            <div class="controls">
+                <a class="btn btn-sm btn-default" href="#">
+                    Edit
+                </a>
+                
+                <a class="btn btn-sm btn-danger" href="#">
+                    Delete
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="todo-form">
+        <form data-bind="submit: create">
+            <input type="text" class="form-control" placeholder="Create new todo..." data-bind="value: title" />
+        </form>
+    </div>
+</div>
