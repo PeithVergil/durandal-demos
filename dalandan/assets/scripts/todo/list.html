@@ -1,20 +1,22 @@
 <div>
-    <ul class="todo-list" data-bind="foreach: todos">
-        <li class="todo-item">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" data-bind="value: id, checked: done " /> <span class="title" data-bind="html: title, css: { 'done': done }"></span>
-                </label>
-            </div>
-            
-            <div class="controls">
-                <a class="btn btn-sm btn-default" href="#">
-                    Edit
-                </a>
+    <ul class="list-group" id="todo-list" data-bind="foreach: todos">
+        <li class="list-group-item">
+            <div class="inner">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-bind="value: id, checked: done " /> <span class="title" data-bind="html: title, css: { 'done': done }"></span>
+                    </label>
+                    
+                </div>
                 
-                <a class="btn btn-sm btn-danger" href="#">
-                    Delete
-                </a>
+                <div class="controls">
+                    <a class="btn btn-sm btn-default" href="#" data-bind="click: $parent.update">
+                        Edit
+                    </a>
+                    <a class="btn btn-sm btn-danger" href="#" data-bind="click: $parent.delete">
+                        Delete
+                    </a>
+                </div>
             </div>
         </li>
     </ul>

@@ -12,6 +12,6 @@ require([
     app.title = 'Dalandan: A Web Application based on DurandalJS';
 
     app.start().then(function() {
-        app.setRoot('shell');
+        app.setRoot('shell', 'entrance');
     });
 });

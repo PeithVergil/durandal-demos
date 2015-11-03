@@ -1,6 +1,6 @@
-define(function(require) {
-    var ko = require('knockout');
-
+define([
+    'knockout',
+], function(ko) {
     return {
         title: ko.observable('All Todos'),
     };
