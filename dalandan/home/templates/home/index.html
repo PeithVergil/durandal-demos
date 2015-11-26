@@ -1,1 +1,7 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/lib/require.js' %}" data-main="main"></script>
+{% endblock %}

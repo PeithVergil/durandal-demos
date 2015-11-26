@@ -4,15 +4,15 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    
+
     def _create(self, username, password):
         new_user = self.model(username=username)
-        
+
         # Hash the raw password.
         new_user.set_password(password)
 
         new_user.save(using=self._db)
-        
+
         return new_user
 
     def create_user(self, username, password):
@@ -46,7 +46,7 @@ class User(AbstractBaseUser):
     @property
     def email(self):
         return None
-    
+
     def get_full_name(self):
         return self.username
 

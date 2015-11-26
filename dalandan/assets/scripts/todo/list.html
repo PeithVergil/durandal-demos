@@ -2,21 +2,29 @@
     <ul class="list-group" id="todo-list" data-bind="foreach: todos">
         <li class="list-group-item">
             <div class="inner">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" data-bind="value: id, checked: done " /> <span class="title" data-bind="html: title, css: { 'done': done }"></span>
-                    </label>
-                    
-                </div>
+                <!-- ko ifnot: edit -->
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-bind="value: id, checked: done " /> <span class="title" data-bind="html: title, css: { 'done': done }"></span>
+                        </label>
+                    </div>
+
+                    <div class="controls">
+                        <a class="btn btn-sm btn-default" href="#" data-bind="click: $parent.update">
+                            Edit
+                        </a>
+                        <a class="btn btn-sm btn-danger" href="#" data-bind="click: $parent.delete">
+                            Delete
+                        </a>
+                    </div>
+                <!-- /ko -->
+
+                <!-- ko if: edit -->
+                    <form data-bind="submit: function() { $parent.update($data); }">
+                        <input type="text" data-bind="value: title" class="form-control" />
+                    </form>
+                <!-- /ko -->
                 
-                <div class="controls">
-                    <a class="btn btn-sm btn-default" href="#" data-bind="click: $parent.update">
-                        Edit
-                    </a>
-                    <a class="btn btn-sm btn-danger" href="#" data-bind="click: $parent.delete">
-                        Delete
-                    </a>
-                </div>
             </div>
         </li>
     </ul>
