@@ -19,6 +19,8 @@
         <!-- Custom CSS -->
         <link href="{% static 'styles/style.css' %}" rel="stylesheet">
 
+        {% block styles %}{% endblock %}
+
         <script>
             // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
             var timeStamp = 't=' + (new Date()).getTime();
@@ -28,6 +30,8 @@
                 // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
                 urlArgs: timeStamp,
                 // ONLY FOR DEVELOPMENT. Prevent RequireJS from caching.
+
+                baseUrl: "{% static 'scripts' %}",
 
                 paths: {
                     'text'       : "{% static 'scripts/lib/text' %}",
@@ -47,34 +51,17 @@
 
     <body>
 
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <a class="navbar-brand" href="#">Dalandan</a>
-
-            <ul class="nav nav-pills">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-            </ul>
-        </nav>
-
-        <div class="container">
-
-          <div class="starter-template">
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-          </div>
-
-        </div><!-- /.container -->
-
+        <div id="applicationHost">
+            <div class="container">
+                <div class="starter-template">
+                    <h1>Bootstrap starter template</h1>
+                    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+                </div>
+            </div><!-- /.container -->
+        </div>
 
         <!-- JavaScript
         ================================================== -->
-        <script src="{% static 'scripts/lib/require.js' %}" data-main="{% static 'scripts/home/main' %}"></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>
