@@ -1,10 +1,11 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'todo/Todo',
+], function(ko, Todo) {
     var todos = ko.observableArray([
-        { id: 1, title: ko.observable('Todo 1'), done: ko.observable(false), edit: ko.observable(false) },
-        { id: 2, title: ko.observable('Todo 2'), done: ko.observable(false), edit: ko.observable(false) },
-        { id: 3, title: ko.observable('Todo 3'), done: ko.observable(false), edit: ko.observable(false) },
+        new Todo(1, 'Todo 1'),
+        new Todo(2, 'Todo 2'),
+        new Todo(3, 'Todo 3'),
     ]);
     
     return {
@@ -16,15 +17,12 @@ define([
             var title = this.title();
 
             if (title) {
-                todos.push({
-                    id    : Math.floor(Math.random() * (999 - 4 + 1)) + 4,
-                    title : ko.observable(title),
-                    done  : ko.observable(false),
-                    edit  : ko.observable(false)
-                });
+                var id = Math.floor(Math.random() * (999 - 4 + 1)) + 4;
+
+                todos.push(new Todo(id, title));
             }
 
-            // Clear
+            // Clear form.
             this.title('');
         },
 
@@ -34,6 +32,32 @@ define([
 
         delete: function(todo) {
             todos.remove(todo);
+        },
+
+        updateSubmit: function(todo) {
+            // Update title to new value.
+            todo.title(todo.draft());
+
+            // Stop edit mode.
+            todo.edit(false);
+        },
+        
+        updateCancel: function(todo, event) {
+            switch (event.keyCode) {
+                // ESCAPE to cancel.
+                case 27:
+                    // Revert draft to old value.
+                    todo.draft(todo.title());
+
+                    // Stop edit mode.
+                    todo.edit(false);
+
+                    break;
+
+                default:
+                    // Handle default behavior.
+                    return true;
+            }
         },
     };
 });

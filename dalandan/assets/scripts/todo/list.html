@@ -20,8 +20,8 @@
                 <!-- /ko -->
 
                 <!-- ko if: edit -->
-                    <form data-bind="submit: function() { $parent.update($data); }">
-                        <input type="text" data-bind="value: title" class="form-control" />
+                    <form data-bind="submit: function() { $parent.updateSubmit($data); }">
+                        <input type="text" data-bind="value: draft, event: { keypress: $parent.updateCancel }" class="form-control" />
                     </form>
                 <!-- /ko -->
                 
