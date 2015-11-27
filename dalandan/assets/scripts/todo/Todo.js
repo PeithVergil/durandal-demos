@@ -5,10 +5,11 @@ define([
         // The primary key.
         this.id = id;
 
+        // The main todo title.
         this.title = ko.observable(title);
 
-        // Temporary storage for the title
-        // as it's being updated.
+        // Temporary storage as 
+        // the title is being edited.
         this.draft = ko.observable(title);
 
         // Has the todo been completed?
