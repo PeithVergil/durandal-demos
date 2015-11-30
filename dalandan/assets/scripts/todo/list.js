@@ -1,7 +1,8 @@
 define([
     'knockout',
     'todo/Todo',
-], function(ko, Todo) {
+    'todo/TodoClient',
+], function(ko, Todo, TodoClient) {
     var todos = ko.observableArray([
         new Todo(1, 'Todo 1'),
         new Todo(2, 'Todo 2'),
@@ -17,9 +18,13 @@ define([
             var title = this.title();
 
             if (title) {
-                var id = Math.floor(Math.random() * (999 - 4 + 1)) + 4;
+                var data = {
+                    title: title
+                };
 
-                todos.push(new Todo(id, title));
+                TodoClient.create(data, function(todo) {
+                    todos.push(todo);
+                });
             }
 
             // Clear form.
