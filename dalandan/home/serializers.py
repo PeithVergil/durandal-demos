@@ -9,7 +9,7 @@ class TodoSerializer(serializers.ModelSerializer):
         model = Todo
 
         fields = (
-            'id', 'title', 'status'
+            'id', 'title', 'status', 'date_created', 'date_updated'
         )
 
         read_only_fields = (
