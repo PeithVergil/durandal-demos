@@ -6,19 +6,28 @@ class Todo(models.Model):
 
     title = models.CharField(_('title'), max_length=200)
 
-    STATUS_DONE = 1
+    STATUS_OPEN = 1
+    STATUS_DONE = 2
 
     STATUS_CHOICES = (
+        (STATUS_OPEN, _('Open')),
         (STATUS_DONE, _('Done')),
     )
 
-    status = models.SmallIntegerField(_('status'), choices=STATUS_CHOICES)
+    status = models.SmallIntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_OPEN)
 
     # Date the todo was created.
     date_created = models.DateTimeField(auto_now_add=True)
 
     # Date the todo was updated.
     date_updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def open(self):
+        """
+        Check if the todo is open or not.
+        """
+        return self.status == self.STATUS_OPEN
 
     @property
     def done(self):
