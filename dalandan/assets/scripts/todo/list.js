@@ -64,5 +64,14 @@ define([
                     return true;
             }
         },
+
+        checked: function(todo, event) {
+            if (todo.done())
+                TodoClient.setStatus(todo, 'done');
+            else
+                TodoClient.setStatus(todo, 'open');
+
+            return true;
+        },
     };
 });
