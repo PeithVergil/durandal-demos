@@ -3,11 +3,13 @@ define([
     'todo/Todo',
     'todo/TodoClient',
 ], function(ko, Todo, TodoClient) {
-    var todos = ko.observableArray([
-        new Todo(1, 'Todo 1'),
-        new Todo(2, 'Todo 2'),
-        new Todo(3, 'Todo 3'),
-    ]);
+    var todos = ko.observableArray();
+
+    TodoClient.list(function(results) {
+        ko.utils.arrayForEach(results, function(result) {
+            todos.push(result);
+        });
+    });
     
     return {
         todos: todos,

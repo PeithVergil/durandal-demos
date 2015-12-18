@@ -14,13 +14,18 @@ class Todo(models.Model):
         (STATUS_DONE, _('Done')),
     )
 
-    status = models.SmallIntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_OPEN)
+    status = models.SmallIntegerField(_('status'),
+                                      default=STATUS_OPEN,
+                                      choices=STATUS_CHOICES)
 
     # Date the todo was created.
     date_created = models.DateTimeField(auto_now_add=True)
 
     # Date the todo was updated.
     date_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('date_created',)
 
     @property
     def open(self):

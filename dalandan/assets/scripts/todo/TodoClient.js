@@ -9,6 +9,19 @@ define([
     function TodoClient() {
     }
 
+    TodoClient.prototype.list = function(callback) {
+        var $request = $.get('/api/v1/todos/list/');
+
+        $request.done(function(result) {
+            var todos = ko.utils.arrayMap(result, function(item) {
+                return new Todo(item.id, item.title);
+            });
+
+            if ((typeof callback) !== 'undefined')
+                callback(todos);
+        });
+    };
+
     TodoClient.prototype.create = function(data, callback) {
         var $request = $.post('/api/v1/todos/create/', data);
 

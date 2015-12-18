@@ -4,6 +4,10 @@ from . import views
 
 
 urlpatterns = [
+    url(regex=r'^list/$',
+        view=views.ListTodoAPIView.as_view(),
+        name='list'),
+
     url(regex=r'^create/$',
         view=views.CreateTodoAPIView.as_view(),
         name='create'),
