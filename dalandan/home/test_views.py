@@ -25,4 +25,24 @@ class ListTodoAPITest(APITestCase):
 
 
 class CreateTodoAPITest(APITestCase):
-    pass
+
+    @property
+    def data(self):
+        return {'title': 'Task #100'}
+
+    def test_status(self):
+        response = self.client.post(reverse('todos_api:create'), self.data)
+
+        # 201 Created
+        self.assertEqual(response.status_code, 201)
+
+    def test_create(self):
+        response = self.client.post(reverse('todos_api:create'), self.data)
+
+        self.assertTrue(response.data['id'] > 0)
+
+    def test_empty(self):
+        response = self.client.post(reverse('todos_api:create'), {})
+
+        # 400 Bad Request
+        self.assertEqual(response.status_code, 400)
