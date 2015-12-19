@@ -2,4 +2,4 @@ Dalandan: Durandal Demos
 ========================
 
 
-Just playing around with the Durandal JavaScript framework.
+A demo project using the DurandalJS Framework with a Django + DRF backend.
