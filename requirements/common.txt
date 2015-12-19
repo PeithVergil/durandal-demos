@@ -1,6 +1,5 @@
 # Common dependencies.
 
-django==1.8.4
+Django==1.8.7
 djangorestframework==3.2.3
 djangorestframework-jwt==1.7.2
-factory-boy==2.6.0
