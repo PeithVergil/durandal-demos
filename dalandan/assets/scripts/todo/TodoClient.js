@@ -10,7 +10,7 @@ define([
     }
 
     TodoClient.prototype.list = function(callback) {
-        var $request = $.get('/api/v1/todos/list/');
+        var $request = $.get('/api/v1/todos/');
 
         $request.done(function(result) {
             var todos = ko.utils.arrayMap(result, function(item) {
@@ -23,7 +23,7 @@ define([
     };
 
     TodoClient.prototype.create = function(data, callback) {
-        var $request = $.post('/api/v1/todos/create/', data);
+        var $request = $.post('/api/v1/todos/', data);
 
         $request.done(function(result) {
             var todo = new Todo(result.id, result.title);
@@ -59,7 +59,7 @@ define([
                 break;
         }
 
-        var $request = $.ajax({ type: 'PATCH', data: data, url: '/api/v1/todos/' + todo.id + '/update/' });
+        var $request = $.ajax({ type: 'PATCH', data: data, url: '/api/v1/todos/' + todo.id + '/' });
 
         $request.done(function(result) {
             switch (result.status) {
