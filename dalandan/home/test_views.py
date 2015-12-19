@@ -46,3 +46,42 @@ class CreateTodoAPITest(APITestCase):
 
         # 400 Bad Request
         self.assertEqual(response.status_code, 400)
+
+
+class UpdateTodoAPITest(APITestCase):
+    fixtures = ['home_todos']
+
+    def test_status(self):
+        # Update task where ID = 1.
+        url = reverse('todos_api:update', args=(1,))
+
+        response = self.client.patch(url, {
+            'status': 2
+        })
+
+        # 200 OK
+        self.assertEqual(response.status_code, 200)
+
+    def test_patch(self):
+        """
+        Update the status of the task where ID = 1.
+        """
+        url = reverse('todos_api:update', args=(1,))
+
+        response = self.client.patch(url, {
+            'status': 2
+        })
+
+        self.assertEqual(response.data['status'], 2)
+
+    def test_put(self):
+        """
+        Update the title of the task where ID = 1.
+        """
+        url = reverse('todos_api:update', args=(1,))
+
+        response = self.client.put(url, {
+            'title': 'Task #1000'
+        })
+
+        self.assertEqual(response.data['title'], 'Task #1000')
