@@ -38,7 +38,9 @@ define([
         },
 
         delete: function(todo) {
-            todos.remove(todo);
+            TodoClient.delete(todo, function() {
+                todos.remove(todo);
+            });
         },
 
         updateSubmit: function(todo) {

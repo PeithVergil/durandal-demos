@@ -33,6 +33,17 @@ define([
         });
     };
 
+    TodoClient.prototype.delete = function(data, callback) {
+        var url = '/api/v1/todos/' + data.id + '/';
+
+        var $request = $.ajax({ type: 'DELETE', url: url });
+
+        $request.done(function(result) {
+            if ((typeof callback) !== 'undefined')
+                callback(data);
+        });
+    };
+
     TodoClient.prototype.setStatus = function(todo, status) {
         switch (status) {
             case 'open':
