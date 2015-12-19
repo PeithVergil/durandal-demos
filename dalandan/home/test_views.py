@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 
 from rest_framework.test import APITestCase
 
+from .models import Todo
+
 
 class ListTodoAPITest(APITestCase):
     fixtures = ['home_todos']
@@ -85,3 +87,26 @@ class UpdateTodoAPITest(APITestCase):
         })
 
         self.assertEqual(response.data['title'], 'Task #1000')
+
+
+class DeleteTodoAPITest(APITestCase):
+    fixtures = ['home_todos']
+
+    def test_status(self):
+        """
+        Test the response status after a successful delete request.
+        """
+        response = self.client.delete(reverse('todos_api:delete', args=(1,)))
+
+        # 204 No Content
+        self.assertEqual(response.status_code, 204)
+
+    def test_delete(self):
+        """
+        Delete a task where ID = 1.
+        """
+        self.client.delete(reverse('todos_api:delete', args=(1,)))
+
+        # The task should no longer exist.
+        with self.assertRaises(Todo.DoesNotExist):
+            Todo.objects.get(pk=1)

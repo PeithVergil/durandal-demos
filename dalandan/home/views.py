@@ -1,6 +1,11 @@
 from django.views.generic import TemplateView
 
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+    UpdateAPIView,
+    DestroyAPIView,
+)
 
 from .models import Todo
 from .serializers import TodoSerializer
@@ -25,6 +30,15 @@ class CreateTodoAPIView(CreateAPIView):
 
 
 class UpdateTodoAPIView(UpdateAPIView):
+
+    serializer_class = TodoSerializer
+
+    @property
+    def queryset(self):
+        return Todo.objects.all()
+
+
+class DeleteTodoAPIView(DestroyAPIView):
 
     serializer_class = TodoSerializer
 
