@@ -95,6 +95,15 @@ class ListCreateTodoAPITest(APITestCase):
 class RetrieveUpdateDeleteTodoAPITest(APITestCase):
     fixtures = ['home_todos']
 
+    def test_status_retrieve(self):
+        """
+        Test the response status after a successful "GET" request.
+        """
+        response = self.client.get(reverse('todos_api:retrieve', args=(1,)))
+
+        # 200 OK
+        self.assertEqual(response.status_code, 200)
+
     def test_status_delete(self):
         """
         Test the response status after a successful "DELETE" request.
@@ -129,6 +138,16 @@ class RetrieveUpdateDeleteTodoAPITest(APITestCase):
 
         # 200 OK
         self.assertEqual(response.status_code, 200)
+
+    def test_retrieve(self):
+        """
+        Retrieve the details of the task where ID = 1.
+        """
+        url = reverse('todos_api:retrieve', args=(1,))
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.data['title'], 'Task #1')
 
     def test_delete(self):
         """
