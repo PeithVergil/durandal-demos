@@ -1,7 +1,7 @@
 define([
     'knockout'
 ], function(ko) {
-    function Todo(id, title) {
+    function Todo(id, title, status) {
         // The primary key.
         this.id = id;
 
@@ -13,7 +13,13 @@ define([
         this.draft = ko.observable(title);
 
         // Has the todo been completed?
-        this.done = ko.observable(false);
+        var done = false;
+
+        switch (status) {
+            case 2: done = true; break;
+        }
+
+        this.done = ko.observable(done);
 
         // Is the todo beeing updated?
         this.edit = ko.observable(false);

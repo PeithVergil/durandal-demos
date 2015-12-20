@@ -14,7 +14,7 @@ define([
 
         $request.done(function(result) {
             var todos = ko.utils.arrayMap(result, function(item) {
-                return new Todo(item.id, item.title);
+                return new Todo(item.id, item.title, item.status);
             });
 
             if ((typeof callback) !== 'undefined')
