@@ -7,6 +7,17 @@ body {
     text-align: center;
 }
 
+.errorlist {
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li {
+    color: #d9534f;
+    font-size: 0.8rem;
+    list-style-type: none;
+}
+
 #todo-list {
     list-style: none;
     padding: 0;
@@ -48,4 +59,12 @@ body {
     padding-left: 0.5rem;
     padding-top: 0.1rem;
     text-transform: uppercase;
+}
+
+.accounts-form {
+    border: 0.2rem solid #f7f7f9;
+    padding: 1.5rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,39 +1,27 @@
 from django.contrib.auth import get_user_model
+from django.views.generic import CreateView
 
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
-# from rest_framework.viewsets import ModelViewSet
 
+from .forms import UserForm
 from .serializers import UserSerializer
 
 
 User = get_user_model()
 
 
-# class ListCreateUserViewSet(ModelViewSet):
-    
-#     @property
-#     def queryset(self):
-#         return User.objects.all()
+class CreateUserView(CreateView):
 
-#     def get_serializer_class(self):
-#         if self.action == 'create':
-#             return CreateUserSerializer
-#         else:
-#             return UserSerializer
+    model = User
+
+    @property
+    def form_class(self):
+        return UserForm
 
 
 class ListUserView(ListAPIView):
 
-    serializer_class = UserSerializer
-    
-    @property
-    def queryset(self):
-        return User.objects.all()
-
-
-class CreateUserView(CreateAPIView):
-    
     serializer_class = UserSerializer
 
     @property
@@ -42,9 +30,9 @@ class CreateUserView(CreateAPIView):
 
 
 class RetrieveUserView(RetrieveAPIView):
-    
+
     serializer_class = UserSerializer
-    
+
     permission_classes = (
         IsAuthenticated,
     )
