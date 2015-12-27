@@ -73,6 +73,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# Messages
+# https://docs.djangoproject.com/en/1.8/ref/settings/#message-tags
+
+MESSAGE_TAGS = {
+    # ERROR
+    40: 'danger',
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
