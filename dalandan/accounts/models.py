@@ -54,4 +54,4 @@ class User(AbstractBaseUser):
         return self.username
 
     def __str__(self):
-        return 'User(id={0}, username={1})'.format(self.id, self.username)
+        return 'id={0}, username={1}'.format(self.id, self.username)
