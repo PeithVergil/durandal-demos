@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
+from rest_framework_jwt import views as jwt_views
+
 from . import views
 
 
@@ -31,7 +33,7 @@ urlpatterns = [
     # Django Rest Framework JWT
     ########################################
 
-    url(r'^auth/$', 'rest_framework_jwt.views.obtain_jwt_token', name='auth'),
-    url(r'^verify/$', 'rest_framework_jwt.views.verify_jwt_token', name='verify'),
-    url(r'^refresh/$', 'rest_framework_jwt.views.refresh_jwt_token', name='refresh'),
+    url(r'^auth/$', jwt_views.obtain_jwt_token, name='auth'),
+    url(r'^verify/$', jwt_views.verify_jwt_token, name='verify'),
+    url(r'^refresh/$', jwt_views.refresh_jwt_token, name='refresh'),
 ]
