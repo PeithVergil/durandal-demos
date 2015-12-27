@@ -1,4 +1,6 @@
-from django.contrib.auth import get_user_model
+from django.contrib import auth
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView
@@ -8,7 +10,7 @@ from .forms import UserForm
 from .serializers import UserSerializer
 
 
-User = get_user_model()
+User = auth.get_user_model()
 
 
 class CreateUserView(CreateView):
@@ -18,6 +20,20 @@ class CreateUserView(CreateView):
     @property
     def form_class(self):
         return UserForm
+
+    def get_success_url(self):
+        """
+        Redirect the user to the same registration page.
+        """
+        return reverse('accounts:create')
+
+    def form_valid(self, form):
+        """
+        Display a flash message that the account has been created.
+        """
+        messages.success(self.request, 'Your new account has been created.')
+
+        return super().form_valid(form)
 
 
 class ListUserView(ListAPIView):

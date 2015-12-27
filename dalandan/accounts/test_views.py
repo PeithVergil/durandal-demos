@@ -1,8 +1,14 @@
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
+
 from rest_framework.test import APITestCase
 
 
+User = get_user_model()
+
+
 class AuthMixin:
-    
+
     fixtures = ['accounts_users']
 
     def authenticate(self, data=None):
@@ -16,7 +22,7 @@ class AuthMixin:
 
 
 class AuthTest(AuthMixin, APITestCase):
-    
+
     def test_valid_login(self):
         response = self.authenticate()
 
@@ -59,7 +65,7 @@ class AuthTest(AuthMixin, APITestCase):
 
 
 class ListUserTest(AuthMixin, APITestCase):
-    
+
     def test_list_user(self):
         response = self.client.get('/accounts/list/')
 
@@ -67,16 +73,33 @@ class ListUserTest(AuthMixin, APITestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class CreateUserTest(AuthMixin, APITestCase):
-    
-    def test_create_user(self):
-        response = self.client.post('/accounts/new/', {
-            'username': 'new_username',
-            'password': 'new_password',
+class CreateUserTest(APITestCase):
+
+    def setUp(self):
+        self.url = reverse('accounts:create')
+
+    def test_create(self):
+        self.client.post(self.url, {
+            'username': 'hello',
+            'password': 'world',
+            'password2': 'world',
         })
 
-        # 201 CREATED
-        self.assertEqual(response.status_code, 201)
+        user = User.objects.get(username='hello')
+
+        self.assertTrue(user.id > 0)
+
+    def test_redirect(self):
+        """
+        Redirect to the same page as the registration page.
+        """
+        response = self.client.post(self.url, {
+            'username': 'hello',
+            'password': 'world',
+            'password2': 'world',
+        })
+
+        self.assertRedirects(response, self.url)
 
 
 class RetrieveUserTest(AuthMixin, APITestCase):
